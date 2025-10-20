@@ -1,1 +1,57 @@
+# Python virtual environment
 venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Data files
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Models
+models/*
+!models/.gitkeep
+*.pkl
+*.joblib
+*.h5
+*.pt
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+
+# Logs (pendiente de desarrollo)
+logs/
+*.log
+
+# Testing (pendiente de desarrollo)
+.pytest_cache/
+.coverage
+htmlcov/
+
+
+
+# Backend (pendiente de desarrollo)
+backend/
+backend/__pycache__/
+backend/*.pyc
