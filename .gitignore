@@ -49,6 +49,8 @@ logs/
 .coverage
 htmlcov/
 
+# setup.py artifacts
+equipo4_ml_project.egg-info/
 
 
 # Backend (pendiente de desarrollo)
