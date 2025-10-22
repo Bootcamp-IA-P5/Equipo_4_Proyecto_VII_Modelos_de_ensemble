@@ -1,9 +1,3 @@
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.so
-
 # Environments
 .env
 .venv/
@@ -11,8 +5,54 @@ env/
 venv/
 ENV/
 
-# Notebooks
-*.ipynb_checkpoints
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.pyo
+*.pyd
+
+# Backend (pendiente de desarrollo)
+backend/
+backend/__pycache__/
+backend/*.pyc
+
+# Data files
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Models
+models/*
+!models/.gitkeep
+*.pkl
+*.joblib
+*.h5
+*.pt
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs (pendiente de desarrollo)
+logs/
+*.log
+
+# Testing (pendiente de desarrollo)
+.pytest_cache/
+.coverage
+htmlcov/
 
 # IDE / Editor specific files
 .idea/
@@ -30,10 +70,6 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 
-# Logs
-*.log
-
 # Project artifacts
-models/
 reports/
 *.pkl
