@@ -1,6 +1,8 @@
-# Python virtual environment
-venv/
+# Environments
+.env
+.venv/
 env/
+venv/
 ENV/
 
 # Python cache
@@ -9,6 +11,13 @@ __pycache__/
 *$py.class
 *.so
 .Python
+*.pyo
+*.pyd
+
+# Backend (pendiente de desarrollo)
+backend/
+backend/__pycache__/
+backend/*.pyc
 
 # Data files
 data/raw/*
@@ -36,10 +45,6 @@ models/*
 *~
 .DS_Store
 
-# Environment variables
-.env
-.env.local
-
 # Logs (pendiente de desarrollo)
 logs/
 *.log
@@ -49,9 +54,22 @@ logs/
 .coverage
 htmlcov/
 
+# IDE / Editor specific files
+.idea/
+.vscode/
 
+# OS-specific files
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
 
-# Backend (pendiente de desarrollo)
-backend/
-backend/__pycache__/
-backend/*.pyc
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Project artifacts
+reports/
+*.pkl
