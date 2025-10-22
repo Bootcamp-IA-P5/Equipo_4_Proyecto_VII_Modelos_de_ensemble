@@ -13,7 +13,7 @@ services:
     environment:
       - PYTHONPATH=/app
     #--reload enables uvicorn server auto-restart whenever source files change (use only for development)
-    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
     restart: unless-stopped
 
   # Frontend con Streamlit

@@ -12,8 +12,8 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copiar requirements y instalar dependencias Python
-COPY requirements.txt .
+# Copiar backend requirements e instalar dependencias Python
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Crear usuario no-root para seguridad

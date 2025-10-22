@@ -1,1 +1,20 @@
-# requerimientos del backend
+# Backend API dependencies
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.9.2
+python-multipart==0.0.9
+
+# Data processing and ML
+numpy==2.3.3
+pandas==2.3.3
+scikit-learn==1.7.2
+scipy==1.16.2
+imbalanced-learn==0.11.0
+joblib==1.5.2
+
+# Model Explainability
+shap==0.43.0
+
+# Utils
+python-dotenv==1.0.0
+pyyaml==6.0.1
