@@ -52,6 +52,6 @@ htmlcov/
 
 
 # Backend (pendiente de desarrollo)
-#backend/
+backend/
 backend/__pycache__/
 backend/*.pyc
