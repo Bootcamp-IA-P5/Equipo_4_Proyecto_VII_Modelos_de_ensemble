@@ -57,3 +57,6 @@ equipo4_ml_project.egg-info/
 #backend/
 backend/__pycache__/
 backend/*.pyc
+
+#reports
+reports/
