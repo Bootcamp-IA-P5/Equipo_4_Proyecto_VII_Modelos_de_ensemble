@@ -28,10 +28,12 @@ app.add_middleware(
 # Define paths
 BASE_DIR = Path("/app")
 MODELS_DIR = BASE_DIR / "models"
-DATASETS_DIR = BASE_DIR / "datasets"
+DATASETS_DIR = BASE_DIR / "data" / "raw"
 
-# Global variable for model
+# Global variables for model and scaler
 model = None
+scaler = None
+feature_names = None
 
 
 class FetalHealthFeatures(BaseModel):
@@ -57,6 +59,10 @@ class FetalHealthFeatures(BaseModel):
     histogram_median: float
     histogram_variance: float
     histogram_tendency: float
+    
+    class Config:
+        # Allow population by field name with spaces (from dataset)
+        allow_population_by_field_name = True
 
 
 class PredictionResponse(BaseModel):
@@ -75,19 +81,37 @@ class HealthResponse(BaseModel):
 @app.on_event("startup")
 async def load_model():
     """Load the trained model on startup"""
-    global model
+    global model, scaler, feature_names
     model_path = MODELS_DIR / "fetal_health_model.pkl"
     
     if model_path.exists():
         try:
-            model = joblib.load(model_path)
-            print(f"Model loaded successfully from {model_path}")
+            # Load the model dictionary
+            model_dict = joblib.load(model_path)
+            
+            # Extract components from dictionary
+            if isinstance(model_dict, dict):
+                model = model_dict.get('model')
+                scaler = model_dict.get('scaler')
+                feature_names = model_dict.get('feature_names')
+                print(f"✓ Model loaded successfully from {model_path}")
+                print(f"  - Model type: {type(model).__name__}")
+                print(f"  - Model name: {model_dict.get('model_name', 'Unknown')}")
+                print(f"  - Features: {len(feature_names) if feature_names else 'Unknown'}")
+            else:
+                # If it's not a dict, assume it's the model directly (backward compatibility)
+                model = model_dict
+                print(f"✓ Model loaded successfully from {model_path} (legacy format)")
         except Exception as e:
-            print(f"Error loading model: {e}")
+            print(f"✗ Error loading model: {e}")
             model = None
+            scaler = None
+            feature_names = None
     else:
-        print(f"Model not found at {model_path}. Please train the model first.")
+        print(f"✗ Model not found at {model_path}. Please train the model first.")
         model = None
+        scaler = None
+        feature_names = None
 
 
 @app.get("/", response_model=dict)
@@ -129,10 +153,27 @@ async def predict(features: FetalHealthFeatures):
     
     try:
         # Convert input to DataFrame
-        input_data = pd.DataFrame([features.dict()])
+        features_dict = features.dict()
+        
+        # Create DataFrame - pandas will use the dict keys as column names
+        input_data = pd.DataFrame([features_dict])
+        
+        # Rename 'baseline_value' to 'baseline value' (with space) to match training data
+        input_data = input_data.rename(columns={'baseline_value': 'baseline value'})
+        
+        # Ensure column order matches training if feature_names available
+        if feature_names is not None:
+            # Reorder columns to match training data
+            input_data = input_data[feature_names]
+        
+        # Apply scaling if scaler is available
+        if scaler is not None:
+            input_data_scaled = scaler.transform(input_data)
+        else:
+            input_data_scaled = input_data
         
         # Make prediction
-        prediction = model.predict(input_data)[0]
+        prediction = model.predict(input_data_scaled)[0]
         
         # Get prediction label
         labels = {1: "Normal", 2: "Suspect", 3: "Pathological"}
@@ -141,7 +182,7 @@ async def predict(features: FetalHealthFeatures):
         # Get confidence if model supports predict_proba
         confidence = None
         if hasattr(model, "predict_proba"):
-            probabilities = model.predict_proba(input_data)[0]
+            probabilities = model.predict_proba(input_data_scaled)[0]
             confidence = float(max(probabilities))
         
         return {

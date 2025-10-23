@@ -14,7 +14,16 @@ RUN apt-get update \
 
 # Copiar backend requirements e instalar dependencias Python
 COPY backend/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Instalar primero las dependencias más pesadas con timeout extendido
+RUN pip install --no-cache-dir --default-timeout=1000 \
+    numpy==2.2.3 \
+    pandas==2.2.3 \
+    scipy==1.15.2 \
+    scikit-learn==1.6.1 \
+    imbalanced-learn==0.12.4 \
+    xgboost==2.0.3
+# Luego instalar el resto de dependencias
+RUN pip install --no-cache-dir --default-timeout=1000 -r requirements.txt
 
 # Crear usuario no-root para seguridad
 RUN useradd --create-home appuser

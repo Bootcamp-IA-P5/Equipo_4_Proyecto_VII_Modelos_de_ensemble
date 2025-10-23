@@ -7,9 +7,9 @@ services:
     ports:
       - "8000:8000"
     volumes:
+      - ./data:/app/data
       - ./models:/app/models
       - ./reports:/app/reports
-      - ./datasets:/app/datasets
     environment:
       - PYTHONPATH=/app
     #--reload enables uvicorn server auto-restart whenever source files change (use only for development)
@@ -26,7 +26,7 @@ services:
     volumes:
       - ./frontend:/app/frontend
       - ./src:/app/src
-      - ./datasets:/app/datasets
+      - ./data:/app/data
       - ./models:/app/models
       - ./reports:/app/reports
     #env_file:
@@ -48,12 +48,12 @@ services:
       dockerfile: backend/Dockerfile
     volumes:
       - ./src:/app/src
-      - ./datasets:/app/datasets
+      - ./data:/app/data
       - ./models:/app/models
       - ./reports:/app/reports
     environment:
       - PYTHONPATH=/app
-    command: python backend/train_model.py
+    command: python src/train_model.py
     #Services assigned to a named profile don’t start when you run docker compose up
     #unless you explicitly opt into that profile, which keeps everyday backend/frontend
     #usage lightweight. When you do need to retrain, launch it with the profile enabled:
