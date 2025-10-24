@@ -9,6 +9,7 @@ matplotlib==3.8.2
 seaborn==0.13.0
 plotly==5.18.0
 
+
 # Jupyter
 jupyter==1.0.0
 notebook==7.0.6
