@@ -22,10 +22,11 @@ backend/*.pyc
 data/processed/*
 !data/processed/.gitkeep
 
-# Models
+# Models (ignore all except trained production models)
 models/*
 !models/.gitkeep
-*.pkl
+!models/fetal_health_model.pkl
+!models/scaler.pkl
 *.joblib
 *.h5
 *.pt
@@ -70,4 +71,3 @@ Desktop.ini
 
 # Project artifacts
 reports/
-*.pkl

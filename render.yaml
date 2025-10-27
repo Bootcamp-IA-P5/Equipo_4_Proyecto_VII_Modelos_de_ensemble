@@ -1,0 +1,32 @@
+services:
+  # Backend API Service
+  - type: web
+    name: fetal-health-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    branch: feat/-Render_deployment  # Especifica tu rama aquí
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: PYTHONUNBUFFERED
+        value: 1
+    
+  # Frontend Streamlit Service
+  - type: web
+    name: fetal-health-frontend
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: .
+    branch: feat/-Render_deployment  # Especifica tu rama aquí
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8501
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: fetal-health-backend
+          property: host

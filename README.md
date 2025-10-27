@@ -21,6 +21,7 @@ Un proyecto de Machine Learning para clasificación de salud fetal utilizando mo
 - [Entrenamiento del Modelo](#entrenamiento-del-modelo)
 - [Documentación de la API](#documentación-de-la-api)
 - [Desarrollo](#desarrollo)
+- [Despliegue](#despliegue)
 - [Resultados](#resultados)
 - [Equipo](#equipo)
 
@@ -312,6 +313,43 @@ El dataset muestra desbalanceo de clases:
 - **Patológico (Clase 3)**: ~8% (176 muestras)
 
 SMOTE se aplica durante el entrenamiento para manejar este desbalanceo.
+
+## 🌐 Despliegue
+
+Este proyecto está preparado para desplegarse en **Render.com** con configuración automática.
+
+### Despliegue Rápido en Render
+
+1. **Fork o clona este repositorio** en tu cuenta de GitHub
+2. **Asegúrate de que los modelos estén entrenados** (ver [Entrenamiento del Modelo](#entrenamiento-del-modelo))
+3. **Incluye los modelos en Git**:
+   ```bash
+   git add -f models/fetal_health_model.pkl models/scaler.pkl
+   git commit -m "Add trained models for deployment"
+   git push
+   ```
+4. **Ve a [Render.com](https://render.com)** y crea una cuenta gratuita
+5. Click en **"New +"** → **"Blueprint"**
+6. Conecta tu repositorio de GitHub
+7. Render detectará automáticamente `render.yaml` y creará ambos servicios
+8. **¡Listo!** Tus servicios estarán disponibles en URLs como:
+   - Frontend: `https://fetal-health-frontend.onrender.com`
+   - Backend API: `https://fetal-health-backend.onrender.com`
+
+### Documentación Completa
+
+Para instrucciones detalladas de despliegue, solución de problemas y opciones de configuración, consulta **[DEPLOYMENT.md](DEPLOYMENT.md)**.
+
+### Otras Plataformas
+
+El proyecto también puede desplegarse en:
+- **Railway.app** - Alternativa simple con free tier
+- **AWS ECS/Fargate** - Para producción escalable
+- **Google Cloud Run** - Serverless con auto-scaling
+- **Azure Container Instances** - Deployment simple en Azure
+- **DigitalOcean** - VPS con Docker Compose
+
+⚠️ **Nota**: El plan gratuito de Render suspende servicios tras 15 minutos de inactividad. Reactiva el servicio antes de demos visitando la URL.
 
 ## 👥 Equipo
 
