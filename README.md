@@ -136,7 +136,7 @@ Equipo_4_Proyecto_VII_Modelos_de_ensemble/
 
 3. **Entrenar el modelo (PRIMER USO)**
    
-   ⚠️ **Importante**: La primera vez que clonas el proyecto, los modelos no están entrenados. Debes ejecutar el pipeline de entrenamiento antes de usar la aplicación:
+   ⚠️ **Importante**: La primera vez que clonas el proyecto, los modelos no están entrenados. (la carpeta backend/data/processed estará vacía). Debes ejecutar el pipeline de entrenamiento antes de usar la aplicación:
    
    ```bash
    docker compose --profile training up train-model
@@ -289,77 +289,6 @@ Realizar una predicción de salud fetal.
 #### `GET /dataset/info`
 Obtener información sobre el dataset incluyendo total de muestras, características, distribución de clases y valores faltantes.
 
-## 🔧 Desarrollo
-
-### Ejecutar Servicios Individuales
-
-**Solo Backend:**
-```bash
-docker compose up backend
-```
-
-**Solo Frontend:**
-```bash
-docker compose up frontend
-```
-
-**Solo Entrenamiento:**
-```bash
-docker compose --profile training up train-model
-```
-
-### Reconstruir Después de Cambios
-
-```bash
-docker compose up --build
-```
-
-### Ver Logs
-
-```bash
-# Todos los servicios
-docker compose logs -f
-
-# Servicio específico
-docker compose logs -f backend
-docker compose logs -f frontend
-docker compose logs -f train-model
-```
-
-### Detener Servicios
-
-```bash
-# Detener y remover contenedores
-docker compose down
-
-# Detener, remover contenedores y volúmenes
-docker compose down -v
-```
-
-### Desarrollo Local (Sin Docker)
-
-1. **Instalar dependencias**
-   ```bash
-   pip install -r backend/requirements.txt
-   pip install -r frontend/requirements.txt
-   ```
-
-2. **Ejecutar backend**
-   ```bash
-   cd backend
-   uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-   ```
-
-3. **Ejecutar frontend** (en otra terminal)
-   ```bash
-   streamlit run frontend/app.py --server.port 8501
-   ```
-
-4. **Ejecutar entrenamiento**
-   ```bash
-   python src/train_model.py
-   ```
-
 ## 📈 Resultados
 
 ### Rendimiento del Modelo
@@ -388,13 +317,17 @@ SMOTE se aplica durante el entrenamiento para manejar este desbalanceo.
 
 **Equipo 4** - Bootcamp IA P5
 
+- **Ignacio Castillo Franco** - [@IgnacioCastilloFranco](https://github.com/IgnacioCastilloFranco)
+- **Ciprian Nica** - [@CiprianNica](https://github.com/CiprianNica)
+- **Umit Gungor** - [@GungorUmit](https://github.com/GungorUmit)
+- **Johi Ortiz Vallejos** - [@johiortiz](https://github.com/johiortiz)
+
 ## 📝 Licencia
 
 Este proyecto es parte de un bootcamp educativo y está destinado para fines de aprendizaje.
 
 ## 🙏 Agradecimientos
 
-- Dataset: [Clasificación de Salud Fetal a partir de datos CTG](https://www.kaggle.com/datasets/andrewmvd/fetal-health-classification/data)
 - Instructores y mentores del Bootcamp IA P5
 - Comunidades de scikit-learn y FastAPI
 
