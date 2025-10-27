@@ -266,8 +266,8 @@ def main():
     print("  EDA COMPLETED SUCCESSFULLY! ✅")
     print("=" * 80)
     print("\nGenerated files:")
-    print("  - datasets/processed/fetal_health_clean.csv")
-    print("  - datasets/processed/eda_summary.txt")
+    print(f"  - {DATA_DIR / 'processed' / 'fetal_health_clean.csv'}")
+    print(f"  - {DATA_DIR / 'processed' / 'eda_summary.txt'}")
     print("\n")
 
 
