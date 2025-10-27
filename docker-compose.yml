@@ -51,10 +51,27 @@ services:
       - ./data:/app/data
       - ./models:/app/models
       - ./reports:/app/reports
+      - ./backend:/app/backend
     environment:
       - PYTHONPATH=/app
-    command: python src/train_model.py
-    #Services assigned to a named profile don’t start when you run docker compose up
+    command: >
+      sh -c "
+      echo '========================================' &&
+      echo 'Installing package in editable mode...' &&
+      echo '========================================' &&
+      pip install --no-cache-dir -e ./backend &&
+      echo '' &&
+      echo '========================================' &&
+      echo 'Running EDA script...' &&
+      echo '========================================' &&
+      python backend/eda.py &&
+      echo '' &&
+      echo '========================================' &&
+      echo 'Running model training script...' &&
+      echo '========================================' &&
+      python src/train_model.py
+      "
+    #Services assigned to a named profile don't start when you run docker compose up
     #unless you explicitly opt into that profile, which keeps everyday backend/frontend
     #usage lightweight. When you do need to retrain, launch it with the profile enabled:
     #"docker compose --profile training up train-model"

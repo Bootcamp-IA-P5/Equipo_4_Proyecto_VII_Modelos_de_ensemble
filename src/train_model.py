@@ -559,7 +559,8 @@ def main():
     print("=" * 80)
     
     # Configuración (rutas en el contenedor)
-    data_path = "/app/data/raw/fetal_health.csv"
+    # Usar el dataset limpio generado por eda.py
+    data_path = "/app/data/processed/fetal_health_clean.csv"
     
     # Crear trainer
     trainer = FetalHealthModelTrainer(data_path=data_path, random_state=42)

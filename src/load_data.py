@@ -19,7 +19,7 @@ def load_data(file_path):
 if __name__ == "__main__":
     
     # Ejemplo de uso
-    from configure import RAW_DATA
+    from backend.configure import RAW_DATA
     
     data = load_data(RAW_DATA / 'fetal_health.csv')
     print(data.head())
