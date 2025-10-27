@@ -180,6 +180,14 @@ async def predict(features: FetalHealthFeatures):
         prediction_label = labels.get(int(prediction), "Unknown")
         
         # Get confidence if model supports predict_proba
+        '''
+        high confidence doesn't always mean correct prediction!!!
+        A poorly trained model might be confidently wrong, showing 95% confidence
+        on an incorrect classification. This confidence metric reflects the
+        model's internal certainty based on its training, not absolute truth. 
+        It's most useful for identifying ambiguous cases—if confidence is low 
+        (say, 0.4), it might warrant human review or additional testing.
+        '''
         confidence = None
         if hasattr(model, "predict_proba"):
             probabilities = model.predict_proba(input_data_scaled)[0]
