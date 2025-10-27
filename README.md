@@ -329,10 +329,11 @@ Este proyecto está preparado para desplegarse en **Render.com** con configuraci
    git push
    ```
 4. **Ve a [Render.com](https://render.com)** y crea una cuenta gratuita
-5. Click en **"New +"** → **"Blueprint"**
-6. Conecta tu repositorio de GitHub
-7. Render detectará automáticamente `render.yaml` y creará ambos servicios
-8. **¡Listo!** Tus servicios estarán disponibles en URLs como:
+5. **Autoriza acceso a tu organización de GitHub** `Bootcamp-IA-P5` (ver [GITHUB_ORG_ACCESS.md](GITHUB_ORG_ACCESS.md) para instrucciones)
+6. Click en **"New +"** → **"Blueprint"**
+7. Selecciona la organización `Bootcamp-IA-P5` y el repositorio
+8. Render detectará automáticamente `render.yaml` y creará ambos servicios
+9. **¡Listo!** Tus servicios estarán disponibles en URLs como:
    - Frontend: `https://fetal-health-frontend.onrender.com`
    - Backend API: `https://fetal-health-backend.onrender.com`
 

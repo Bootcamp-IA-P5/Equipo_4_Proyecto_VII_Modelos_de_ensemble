@@ -12,6 +12,15 @@ import os
 # Configuration
 BACKEND_URL = os.getenv("BACKEND_URL", "http://backend:8000")
 
+# Ensure BACKEND_URL has a scheme (http:// or https://)
+if BACKEND_URL and not BACKEND_URL.startswith(('http://', 'https://')):
+    # If deployed on Render, use https
+    if 'onrender.com' in BACKEND_URL:
+        BACKEND_URL = f"https://{BACKEND_URL}"
+    else:
+        # Default to http for local development
+        BACKEND_URL = f"http://{BACKEND_URL}"
+
 # Page configuration
 st.set_page_config(
     page_title="Fetal Health Classification",

@@ -26,7 +26,4 @@ services:
       - key: PORT
         value: 8501
       - key: BACKEND_URL
-        fromService:
-          type: web
-          name: fetal-health-backend
-          property: host
+        value: https://fetal-health-backend-jnsr.onrender.com
