@@ -1,4 +1,4 @@
-# Fetal Health Classification - Ensemble Models Project
+# Clasificación de Salud Fetal - Proyecto de Modelos de Ensemble
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-green.svg)
@@ -6,161 +6,161 @@
 ![Docker](https://img.shields.io/badge/Docker-Compose-blue.svg)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6.1-orange.svg)
 
-A machine learning project for fetal health classification using ensemble models, featuring automated hyperparameter optimization, containerized deployment, and interactive web interfaces.
+Un proyecto de Machine Learning para clasificación de salud fetal utilizando modelos de ensemble, con optimización automática de hiperparámetros, despliegue containerizado e interfaces web interactivas.
 
-**[📋 Project Management](https://github.com/orgs/Bootcamp-IA-P5/projects/5)** | **[📊 Dataset on Kaggle](https://www.kaggle.com/datasets/andrewmvd/fetal-health-classification/data)**
+**[📋 Gestión del Proyecto](https://github.com/orgs/Bootcamp-IA-P5/projects/5)** | **[📊 Dataset en Kaggle](https://www.kaggle.com/datasets/andrewmvd/fetal-health-classification/data)**
 
-## 📋 Table of Contents
+## 📋 Tabla de Contenidos
 
-- [Overview](#overview)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Technologies](#technologies)
-- [Quick Start](#quick-start)
-- [Usage](#usage)
-- [Model Training](#model-training)
-- [API Documentation](#api-documentation)
-- [Development](#development)
-- [Results](#results)
-- [Team](#team)
+- [Descripción General](#descripción-general)
+- [Características](#características)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Tecnologías](#tecnologías)
+- [Inicio Rápido](#inicio-rápido)
+- [Uso](#uso)
+- [Entrenamiento del Modelo](#entrenamiento-del-modelo)
+- [Documentación de la API](#documentación-de-la-api)
+- [Desarrollo](#desarrollo)
+- [Resultados](#resultados)
+- [Equipo](#equipo)
 
-## 🎯 Overview
+## 🎯 Descripción General
 
-This project implements a multiclass classification system to predict fetal health status from cardiotocographic (CTG) data. The system uses ensemble machine learning models with automated hyperparameter optimization to classify fetal health into three categories:
+Este proyecto implementa un sistema de clasificación multiclase para predecir el estado de salud fetal a partir de datos de cardiotocografía (CTG). El sistema utiliza modelos de Machine Learning de tipo ensemble con optimización automática de hiperparámetros para clasificar la salud fetal en tres categorías:
 
-1. **Normal** (Class 1)
-2. **Suspect** (Class 2)
-3. **Pathological** (Class 3)
+1. **Normal** (Clase 1)
+2. **Sospechoso** (Clase 2)
+3. **Patológico** (Clase 3)
 
-The project includes:
-- Automated EDA (Exploratory Data Analysis)
-- Model training with GridSearchCV optimization
-- RESTful API for predictions
-- Interactive Streamlit dashboard
-- Fully containerized deployment with Docker
+El proyecto incluye:
+- EDA automatizado (Análisis Exploratorio de Datos)
+- Entrenamiento de modelos con optimización GridSearchCV
+- API RESTful para predicciones
+- Dashboard interactivo con Streamlit
+- Despliegue completamente containerizado con Docker
 
-## ✨ Features
+## ✨ Características
 
 ### Machine Learning
-- **Ensemble Models**: Random Forest, Gradient Boosting, AdaBoost, Bagging, XGBoost
-- **Baseline Models**: Logistic Regression, Decision Tree, KNN, Naive Bayes, SVM
-- **Automated Optimization**: GridSearchCV for hyperparameter tuning
-- **Class Imbalance Handling**: SMOTE oversampling
-- **Cross-Validation**: Stratified K-Fold validation
+- **Modelos Ensemble**: Random Forest, Gradient Boosting, AdaBoost, Bagging, XGBoost
+- **Modelos Baseline**: Regresión Logística, Árbol de Decisión, KNN, Naive Bayes, SVM
+- **Optimización Automática**: GridSearchCV para ajuste de hiperparámetros
+- **Manejo de Desbalanceo**: Sobremuestreo con SMOTE
+- **Validación Cruzada**: Validación estratificada K-Fold
 
-### Application
-- **FastAPI Backend**: RESTful API with automatic documentation
-- **Streamlit Frontend**: Interactive web interface for predictions
-- **Docker Deployment**: Multi-container orchestration
-- **Model Persistence**: Serialized models with joblib
-- **Comprehensive Logging**: Training metrics and reports
+### Aplicación
+- **Backend FastAPI**: API RESTful con documentación automática
+- **Frontend Streamlit**: Interfaz web interactiva para predicciones
+- **Despliegue Docker**: Orquestación multi-contenedor
+- **Persistencia de Modelos**: Modelos serializados con joblib
+- **Registro Completo**: Métricas de entrenamiento e informes
 
-## 📁 Project Structure
+## 📁 Estructura del Proyecto
 
 ```
 Equipo_4_Proyecto_VII_Modelos_de_ensemble/
-├── backend/                    # FastAPI backend service
+├── backend/                    # Servicio backend FastAPI
 │   ├── app/
-│   │   ├── main.py            # API endpoints
-│   │   ├── routes/            # API route handlers (modular structure)
-│   │   └── services/          # Business logic services
-│   ├── configure.py           # Path configuration
-│   ├── eda.py                 # Exploratory Data Analysis script
-│   ├── setup.py               # Package setup
-│   ├── requirements.txt       # Python dependencies
-│   └── Dockerfile             # Backend container definition
-├── frontend/                   # Streamlit frontend service
-│   ├── app.py                 # Streamlit dashboard
-│   ├── requirements.txt       # Frontend dependencies
-│   └── Dockerfile             # Frontend container definition
-├── src/                        # Source code
-│   ├── train_model.py         # Model training pipeline
-│   └── load_data.py           # Data loading utilities
-├── data/                       # Data directory (mounted volume)
-│   ├── raw/                   # Original dataset
-│   └── processed/             # Cleaned/processed data
-├── models/                     # Trained models (mounted volume)
+│   │   ├── main.py            # Endpoints de la API
+│   │   ├── routes/            # Manejadores de rutas (estructura modular)
+│   │   └── services/          # Servicios de lógica de negocio
+│   ├── configure.py           # Configuración de rutas
+│   ├── eda.py                 # Script de Análisis Exploratorio
+│   ├── setup.py               # Configuración del paquete
+│   ├── requirements.txt       # Dependencias Python
+│   └── Dockerfile             # Definición del contenedor backend
+├── frontend/                   # Servicio frontend Streamlit
+│   ├── app.py                 # Dashboard Streamlit
+│   ├── requirements.txt       # Dependencias frontend
+│   └── Dockerfile             # Definición del contenedor frontend
+├── src/                        # Código fuente
+│   ├── train_model.py         # Pipeline de entrenamiento
+│   └── load_data.py           # Utilidades de carga de datos
+├── data/                       # Directorio de datos (volumen montado)
+│   ├── raw/                   # Dataset original
+│   └── processed/             # Datos limpios/procesados
+├── models/                     # Modelos entrenados (volumen montado)
 │   ├── fetal_health_model.pkl
 │   └── scaler.pkl
-├── reports/                    # Training reports and metrics (mounted volume)
+├── reports/                    # Informes y métricas (volumen montado)
 │   ├── metrics_*.json
 │   ├── model_comparison_*.csv
 │   └── best_model_report_*.txt
-├── notebooks/                  # Jupyter notebooks for analysis
-├── docker-compose.yml          # Multi-container orchestration
-└── README.md                   # This file
+├── notebooks/                  # Notebooks Jupyter para análisis
+├── docker-compose.yml          # Orquestación multi-contenedor
+└── README.md                   # Este archivo
 ```
 
-## 🛠 Technologies
+## 🛠 Tecnologías
 
 ### Backend
-- **FastAPI** - Modern, fast web framework for building APIs
-- **Uvicorn** - ASGI server for FastAPI
-- **Pydantic** - Data validation using Python type annotations
-- **scikit-learn** - Machine learning library
-- **XGBoost** - Gradient boosting framework
-- **imbalanced-learn** - SMOTE for handling class imbalance
-- **SHAP** - Model explainability
+- **FastAPI** - Framework web moderno y rápido para construir APIs
+- **Uvicorn** - Servidor ASGI para FastAPI
+- **Pydantic** - Validación de datos usando anotaciones de tipo Python
+- **scikit-learn** - Biblioteca de Machine Learning
+- **XGBoost** - Framework de gradient boosting
+- **imbalanced-learn** - SMOTE para manejo de desbalanceo de clases
+- **SHAP** - Explicabilidad de modelos
 
 ### Frontend
-- **Streamlit** - Framework for data science web apps
-- **Pandas** - Data manipulation
-- **Matplotlib/Seaborn** - Data visualization
+- **Streamlit** - Framework para aplicaciones web de ciencia de datos
+- **Pandas** - Manipulación de datos
+- **Matplotlib/Seaborn** - Visualización de datos
 
-### Infrastructure
-- **Docker** - Containerization
-- **Docker Compose** - Multi-container orchestration
-- **Python 3.11** - Programming language
+### Infraestructura
+- **Docker** - Containerización
+- **Docker Compose** - Orquestación multi-contenedor
+- **Python 3.11** - Lenguaje de programación
 
-## 🚀 Quick Start
+## 🚀 Inicio Rápido
 
-### Prerequisites
+### Requisitos Previos
 
-- Docker Desktop installed and running
-- Git (for cloning the repository)
-- At least 4GB of available RAM
+- Docker Desktop instalado y en ejecución
+- Git (para clonar el repositorio)
+- Al menos 4GB de RAM disponible
 
-### Installation
+### Instalación
 
-1. **Clone the repository**
+1. **Clonar el repositorio**
    ```bash
    git clone https://github.com/Bootcamp-IA-P5/Equipo_4_Proyecto_VII_Modelos_de_ensemble.git
    cd Equipo_4_Proyecto_VII_Modelos_de_ensemble
    ```
 
-2. **Ensure the dataset is in place**
+2. **Asegurar que el dataset esté en su lugar**
    ```bash
-   # The dataset should be at:
+   # El dataset debe estar en:
    data/raw/fetal_health.csv
    ```
 
-3. **Build and start the services**
+3. **Construir e iniciar los servicios**
    ```bash
    docker compose up --build
    ```
 
-4. **Access the applications**
+4. **Acceder a las aplicaciones**
    - **Frontend (Streamlit)**: http://localhost:8501
    - **Backend API**: http://localhost:8000
-   - **API Documentation**: http://localhost:8000/docs
+   - **Documentación API**: http://localhost:8000/docs
 
-## 📊 Usage
+## 📊 Uso
 
-### Using the Web Interface (Streamlit)
+### Usando la Interfaz Web (Streamlit)
 
-1. Navigate to http://localhost:8501
-2. Enter the CTG parameters in the input fields
-3. Click "Predict" to get the classification result
-4. View the prediction confidence and class label
+1. Navegar a http://localhost:8501
+2. Ingresar los parámetros CTG en los campos de entrada
+3. Hacer clic en "Predict" para obtener el resultado de clasificación
+4. Ver la confianza de la predicción y la etiqueta de clase
 
-### Using the API
+### Usando la API
 
-#### Health Check
+#### Verificación de Estado
 ```bash
 curl http://localhost:8000/health
 ```
 
-#### Make a Prediction
+#### Hacer una Predicción
 ```bash
 curl -X POST http://localhost:8000/predict \
   -H "Content-Type: application/json" \
@@ -176,93 +176,93 @@ curl -X POST http://localhost:8000/predict \
   }'
 ```
 
-#### Get Dataset Info
+#### Obtener Información del Dataset
 ```bash
 curl http://localhost:8000/dataset/info
 ```
 
-## 🎓 Model Training
+## 🎓 Entrenamiento del Modelo
 
-### Running the Complete Training Pipeline
+### Ejecutar el Pipeline Completo de Entrenamiento
 
-The training pipeline includes EDA, data preprocessing, model training with hyperparameter optimization, and evaluation:
+El pipeline de entrenamiento incluye EDA, preprocesamiento de datos, entrenamiento con optimización de hiperparámetros y evaluación:
 
 ```bash
 docker compose --profile training up train-model
 ```
 
-This will:
-1. **Install dependencies** in editable mode
-2. **Run EDA script** (`backend/eda.py`)
-   - Analyze data quality
-   - Generate statistics
-   - Save cleaned dataset to `data/processed/`
-3. **Train models** (`src/train_model.py`)
-   - Train baseline models
-   - Optimize ensemble models with GridSearchCV
-   - Evaluate and compare all models
-   - Save best model to `models/`
-   - Generate reports in `reports/`
+Esto realizará:
+1. **Instalar dependencias** en modo editable
+2. **Ejecutar script EDA** (`backend/eda.py`)
+   - Analizar calidad de datos
+   - Generar estadísticas
+   - Guardar dataset limpio en `data/processed/`
+3. **Entrenar modelos** (`src/train_model.py`)
+   - Entrenar modelos baseline
+   - Optimizar modelos ensemble con GridSearchCV
+   - Evaluar y comparar todos los modelos
+   - Guardar mejor modelo en `models/`
+   - Generar informes en `reports/`
 
-### Training Configuration
+### Configuración de Entrenamiento
 
-The training pipeline uses:
-- **Test Split**: 20% of data
-- **Cross-Validation**: 5-fold Stratified K-Fold
-- **SMOTE**: Applied to balance training classes
-- **Optimization**: GridSearchCV for ensemble models
-- **Metrics**: Accuracy, Precision, Recall, F1-Score
+El pipeline de entrenamiento utiliza:
+- **División Test**: 20% de los datos
+- **Validación Cruzada**: 5-fold K-Fold Estratificado
+- **SMOTE**: Aplicado para balancear clases de entrenamiento
+- **Optimización**: GridSearchCV para modelos ensemble
+- **Métricas**: Accuracy, Precision, Recall, F1-Score
 
-### Models Trained
+### Modelos Entrenados
 
-**Baseline Models** (default hyperparameters):
-- Logistic Regression
-- Decision Tree
-- K-Nearest Neighbors
+**Modelos Baseline** (hiperparámetros por defecto):
+- Regresión Logística
+- Árbol de Decisión
+- K-Vecinos Más Cercanos
 - Naive Bayes
-- Support Vector Machine
+- Máquina de Vectores de Soporte
 
-**Ensemble Models** (with GridSearchCV optimization):
+**Modelos Ensemble** (con optimización GridSearchCV):
 - Random Forest
 - Gradient Boosting
 - AdaBoost
-- Bagging Classifier
-- Voting Classifier (ensemble of ensembles)
-- Stacking Classifier
+- Clasificador Bagging
+- Clasificador Voting (ensemble de ensembles)
+- Clasificador Stacking
 
-### Output Files
+### Archivos de Salida
 
-After training, you'll find:
-- `models/fetal_health_model.pkl` - Best trained model
-- `models/scaler.pkl` - Fitted StandardScaler
-- `reports/metrics_*.json` - All model metrics
-- `reports/model_comparison_*.csv` - Model comparison table
-- `reports/best_model_report_*.txt` - Detailed best model report
-- `data/processed/fetal_health_clean.csv` - Cleaned dataset
-- `data/processed/eda_summary.txt` - EDA summary report
+Después del entrenamiento, encontrarás:
+- `models/fetal_health_model.pkl` - Mejor modelo entrenado
+- `models/scaler.pkl` - StandardScaler ajustado
+- `reports/metrics_*.json` - Todas las métricas de los modelos
+- `reports/model_comparison_*.csv` - Tabla de comparación de modelos
+- `reports/best_model_report_*.txt` - Informe detallado del mejor modelo
+- `data/processed/fetal_health_clean.csv` - Dataset limpio
+- `data/processed/eda_summary.txt` - Resumen del EDA
 
-## 📖 API Documentation
+## 📖 Documentación de la API
 
-### Interactive Documentation
+### Documentación Interactiva
 
-FastAPI provides automatic interactive documentation:
+FastAPI proporciona documentación interactiva automática:
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 
 ### Endpoints
 
 #### `GET /`
-Root endpoint with API information.
+Endpoint raíz con información de la API.
 
 #### `GET /health`
-Health check endpoint.
+Endpoint de verificación de estado.
 
 #### `POST /predict`
-Make a fetal health prediction.
+Realizar una predicción de salud fetal.
 
-**Request Body**: 21 CTG features including baseline value, accelerations, decelerations, variability, and histogram features.
+**Cuerpo de la Solicitud**: 21 características CTG incluyendo valor basal, aceleraciones, deceleraciones, variabilidad y características del histograma.
 
-**Response**:
+**Respuesta**:
 ```json
 {
   "prediction": 1,
@@ -272,118 +272,118 @@ Make a fetal health prediction.
 ```
 
 #### `GET /dataset/info`
-Get information about the dataset including total samples, features, class distribution, and missing values.
+Obtener información sobre el dataset incluyendo total de muestras, características, distribución de clases y valores faltantes.
 
-## 🔧 Development
+## 🔧 Desarrollo
 
-### Running Individual Services
+### Ejecutar Servicios Individuales
 
-**Backend only:**
+**Solo Backend:**
 ```bash
 docker compose up backend
 ```
 
-**Frontend only:**
+**Solo Frontend:**
 ```bash
 docker compose up frontend
 ```
 
-**Training only:**
+**Solo Entrenamiento:**
 ```bash
 docker compose --profile training up train-model
 ```
 
-### Rebuilding After Changes
+### Reconstruir Después de Cambios
 
 ```bash
 docker compose up --build
 ```
 
-### Viewing Logs
+### Ver Logs
 
 ```bash
-# All services
+# Todos los servicios
 docker compose logs -f
 
-# Specific service
+# Servicio específico
 docker compose logs -f backend
 docker compose logs -f frontend
 docker compose logs -f train-model
 ```
 
-### Stopping Services
+### Detener Servicios
 
 ```bash
-# Stop and remove containers
+# Detener y remover contenedores
 docker compose down
 
-# Stop, remove containers and volumes
+# Detener, remover contenedores y volúmenes
 docker compose down -v
 ```
 
-### Local Development (Without Docker)
+### Desarrollo Local (Sin Docker)
 
-1. **Install dependencies**
+1. **Instalar dependencias**
    ```bash
    pip install -r backend/requirements.txt
    pip install -r frontend/requirements.txt
    ```
 
-2. **Run backend**
+2. **Ejecutar backend**
    ```bash
    cd backend
    uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
    ```
 
-3. **Run frontend** (in another terminal)
+3. **Ejecutar frontend** (en otra terminal)
    ```bash
    streamlit run frontend/app.py --server.port 8501
    ```
 
-4. **Run training**
+4. **Ejecutar entrenamiento**
    ```bash
    python src/train_model.py
    ```
 
-## 📈 Results
+## 📈 Resultados
 
-### Model Performance
+### Rendimiento del Modelo
 
-The best performing model (typically AdaBoost or Random Forest) achieves:
-- **Test Accuracy**: ~95%
-- **Cross-Validation Score**: ~98%
-- **Precision**: ~95%
+El mejor modelo (típicamente AdaBoost o Random Forest) alcanza:
+- **Accuracy Test**: ~95%
+- **Score Validación Cruzada**: ~98%
+- **Precisión**: ~95%
 - **Recall**: ~95%
 - **F1-Score**: ~95%
 
-Detailed results are available in:
-- `reports/model_comparison_*.csv` - Comparison of all models
-- `reports/best_model_report_*.txt` - Detailed best model metrics
+Los resultados detallados están disponibles en:
+- `reports/model_comparison_*.csv` - Comparación de todos los modelos
+- `reports/best_model_report_*.txt` - Métricas detalladas del mejor modelo
 
-### Class Distribution
+### Distribución de Clases
 
-The dataset shows class imbalance:
-- **Normal (Class 1)**: ~78% (1655 samples)
-- **Suspect (Class 2)**: ~14% (295 samples)
-- **Pathological (Class 3)**: ~8% (176 samples)
+El dataset muestra desbalanceo de clases:
+- **Normal (Clase 1)**: ~78% (1655 muestras)
+- **Sospechoso (Clase 2)**: ~14% (295 muestras)
+- **Patológico (Clase 3)**: ~8% (176 muestras)
 
-SMOTE is applied during training to handle this imbalance.
+SMOTE se aplica durante el entrenamiento para manejar este desbalanceo.
 
-## 👥 Team
+## 👥 Equipo
 
 **Equipo 4** - Bootcamp IA P5
 
-## 📝 License
+## 📝 Licencia
 
-This project is part of an educational bootcamp and is intended for learning purposes.
+Este proyecto es parte de un bootcamp educativo y está destinado para fines de aprendizaje.
 
-## 🙏 Acknowledgments
+## 🙏 Agradecimientos
 
-- Dataset: [Fetal Health Classification from CTG data](https://www.kaggle.com/datasets/andrewmvd/fetal-health-classification/data)
-- Bootcamp IA P5 instructors and mentors
-- scikit-learn and FastAPI communities
+- Dataset: [Clasificación de Salud Fetal a partir de datos CTG](https://www.kaggle.com/datasets/andrewmvd/fetal-health-classification/data)
+- Instructores y mentores del Bootcamp IA P5
+- Comunidades de scikit-learn y FastAPI
 
 ---
 
-**Note**: This is a machine learning project for educational purposes. Medical decisions should always be made by qualified healthcare professionals.
+**Nota**: Este es un proyecto de Machine Learning para fines educativos. Las decisiones médicas siempre deben ser tomadas por profesionales de la salud cualificados.
 
