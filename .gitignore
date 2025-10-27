@@ -14,14 +14,11 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Backend (pendiente de desarrollo)
-backend/
+# Backend
 backend/__pycache__/
 backend/*.pyc
 
 # Data files
-data/raw/*
-!data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
 
@@ -45,11 +42,11 @@ models/*
 *~
 .DS_Store
 
-# Logs (pendiente de desarrollo)
+# Logs 
 logs/
 *.log
 
-# Testing (pendiente de desarrollo)
+# Testing
 .pytest_cache/
 .coverage
 htmlcov/
