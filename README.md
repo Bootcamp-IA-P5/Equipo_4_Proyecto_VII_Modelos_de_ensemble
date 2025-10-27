@@ -5,13 +5,25 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-Latest-red.svg)
 ![Docker](https://img.shields.io/badge/Docker-Compose-blue.svg)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6.1-orange.svg)
+![Render](https://img.shields.io/badge/Deployed%20on-Render-46E3B7.svg)
 
 Un proyecto de Machine Learning para clasificación de salud fetal utilizando modelos de ensemble, con optimización automática de hiperparámetros, despliegue containerizado e interfaces web interactivas.
 
 **[📋 Gestión del Proyecto](https://github.com/orgs/Bootcamp-IA-P5/projects/5)** | **[📊 Dataset en Kaggle](https://www.kaggle.com/datasets/andrewmvd/fetal-health-classification/data)**
 
+## 🌐 Demo en Vivo
+
+El proyecto está desplegado y disponible en línea:
+
+- **🎨 Frontend (Streamlit)**: [https://fetal-health-frontend.onrender.com](https://fetal-health-frontend.onrender.com)
+- **🔌 Backend API**: [https://fetal-health-backend-jnsr.onrender.com](https://fetal-health-backend-jnsr.onrender.com)
+- **📚 Documentación API Interactiva**: [https://fetal-health-backend-jnsr.onrender.com/docs](https://fetal-health-backend-jnsr.onrender.com/docs)
+
+> ⚠️ **Nota**: Los servicios gratuitos de Render se suspenden tras 15 minutos de inactividad. Si encuentras el servicio inactivo, espera 30-60 segundos para que se reactive automáticamente.
+
 ## 📋 Tabla de Contenidos
 
+- [Demo en Vivo](#-demo-en-vivo)
 - [Descripción General](#descripción-general)
 - [Características](#características)
 - [Estructura del Proyecto](#estructura-del-proyecto)
@@ -21,6 +33,7 @@ Un proyecto de Machine Learning para clasificación de salud fetal utilizando mo
 - [Entrenamiento del Modelo](#entrenamiento-del-modelo)
 - [Documentación de la API](#documentación-de-la-api)
 - [Desarrollo](#desarrollo)
+- [Despliegue](#despliegue)
 - [Resultados](#resultados)
 - [Equipo](#equipo)
 
@@ -161,16 +174,75 @@ Equipo_4_Proyecto_VII_Modelos_de_ensemble/
 
 ## 📊 Uso
 
-### Usando la Interfaz Web (Streamlit)
+### 🌐 Usando la Aplicación en Línea (Recomendado)
+
+La forma más fácil de probar el sistema es usando la **demo en vivo**:
+
+1. **Accede al Frontend**: [https://fetal-health-frontend.onrender.com](https://fetal-health-frontend.onrender.com)
+2. **Ingresa los parámetros CTG** en los campos de entrada
+3. **Haz clic en "Predict"** para obtener el resultado de clasificación
+4. **Observa la predicción**: clase, etiqueta y nivel de confianza
+
+> 💡 **Tip**: Si es la primera visita o el servicio está inactivo, espera 30-60 segundos para que se active.
+
+### 🖥️ Usando la Interfaz Web Local (Desarrollo)
+
+Si has clonado el proyecto y lo ejecutas localmente:
 
 1. Navegar a http://localhost:8501
 2. Ingresar los parámetros CTG en los campos de entrada
 3. Hacer clic en "Predict" para obtener el resultado de clasificación
 4. Ver la confianza de la predicción y la etiqueta de clase
 
-### Usando la API
+### 🔌 Usando la API
 
-#### Verificación de Estado
+#### API en Producción (Render)
+
+**Verificación de Estado:**
+```bash
+curl https://fetal-health-backend-jnsr.onrender.com/health
+```
+
+**Hacer una Predicción:**
+```bash
+curl -X POST https://fetal-health-backend-jnsr.onrender.com/predict \
+  -H "Content-Type: application/json" \
+  -d '{
+    "baseline_value": 120.0,
+    "accelerations": 0.0,
+    "fetal_movement": 0.0,
+    "uterine_contractions": 0.0,
+    "light_decelerations": 0.0,
+    "severe_decelerations": 0.0,
+    "prolongued_decelerations": 0.0,
+    "abnormal_short_term_variability": 73.0,
+    "mean_value_of_short_term_variability": 0.5,
+    "percentage_of_time_with_abnormal_long_term_variability": 43.0,
+    "mean_value_of_long_term_variability": 2.4,
+    "histogram_width": 64.0,
+    "histogram_min": 62.0,
+    "histogram_max": 126.0,
+    "histogram_number_of_peaks": 2.0,
+    "histogram_number_of_zeroes": 0.0,
+    "histogram_mode": 120.0,
+    "histogram_mean": 137.0,
+    "histogram_median": 121.0,
+    "histogram_variance": 73.0,
+    "histogram_tendency": 1.0
+  }'
+```
+
+**Obtener Información del Dataset:**
+```bash
+curl https://fetal-health-backend-jnsr.onrender.com/dataset/info
+```
+
+**Documentación Interactiva:**
+Visita [https://fetal-health-backend-jnsr.onrender.com/docs](https://fetal-health-backend-jnsr.onrender.com/docs) para probar la API directamente desde el navegador.
+
+#### API Local (Desarrollo)
+
+**Verificación de Estado:**
 ```bash
 curl http://localhost:8000/health
 ```
@@ -289,7 +361,84 @@ Realizar una predicción de salud fetal.
 #### `GET /dataset/info`
 Obtener información sobre el dataset incluyendo total de muestras, características, distribución de clases y valores faltantes.
 
-## 📈 Resultados
+## � Despliegue
+
+### Estado Actual
+
+✅ **El proyecto está desplegado y funcionando en producción en Render.com**
+
+- **Frontend**: [https://fetal-health-frontend.onrender.com](https://fetal-health-frontend.onrender.com)
+- **Backend**: [https://fetal-health-backend-jnsr.onrender.com](https://fetal-health-backend-jnsr.onrender.com)
+- **Documentación API**: [https://fetal-health-backend-jnsr.onrender.com/docs](https://fetal-health-backend-jnsr.onrender.com/docs)
+
+### Características del Despliegue
+
+- ✅ **Containerizado con Docker**: Backend y Frontend en contenedores independientes
+- ✅ **CI/CD Automático**: Despliegue automático desde GitHub (rama `feat/-Render_deployment`)
+- ✅ **HTTPS Seguro**: Certificados SSL automáticos proporcionados por Render
+- ✅ **Health Checks**: Monitoreo automático del estado del servicio
+- ✅ **Escalabilidad**: Preparado para escalar según demanda
+
+### Infraestructura
+
+```
+GitHub (feat/-Render_deployment)
+         ↓
+    Auto-deploy
+         ↓
+┌─────────────────────────────┐
+│       Render.com            │
+│  ┌────────────────────────┐ │
+│  │  Backend (FastAPI)     │ │ → https://fetal-health-backend-jnsr.onrender.com
+│  │  - Puerto: 8000        │ │
+│  │  - Health: /health     │ │
+│  └────────────────────────┘ │
+│                             │
+│  ┌────────────────────────┐ │
+│  │  Frontend (Streamlit)  │ │ → https://fetal-health-frontend.onrender.com
+│  │  - Puerto: 8501        │ │
+│  │  - Conecta al Backend  │ │
+│  └────────────────────────┘ │
+└─────────────────────────────┘
+```
+
+### Limitaciones del Plan Gratuito
+
+- **Suspensión por inactividad**: Los servicios se suspenden tras 15 minutos sin uso
+- **Tiempo de reactivación**: 30-60 segundos al primer acceso después de suspensión
+- **Recursos limitados**: 512 MB RAM, CPU compartida
+- **750 horas/mes**: Tiempo de ejecución gratuito por servicio
+
+### Desplegar tu Propia Instancia
+
+Si deseas desplegar tu propia versión del proyecto:
+
+1. **Fork el repositorio** a tu organización o cuenta de GitHub
+2. **Crea una cuenta en [Render.com](https://render.com)** (gratis)
+3. **Autoriza acceso** a tu organización de GitHub (ver [GITHUB_ORG_ACCESS.md](GITHUB_ORG_ACCESS.md))
+4. **Sigue la guía de despliegue**: Ver [DEPLOYMENT.md](DEPLOYMENT.md) y [RENDER_CHECKLIST.md](RENDER_CHECKLIST.md)
+
+La configuración está completamente automatizada mediante `render.yaml`. Render detectará automáticamente la configuración y desplegará ambos servicios.
+
+### Monitoreo y Logs
+
+Puedes monitorear el estado de los servicios en:
+- **Render Dashboard**: [https://dashboard.render.com](https://dashboard.render.com)
+- **Logs en tiempo real**: Disponibles en el dashboard de cada servicio
+- **Métricas**: CPU, memoria, tiempo de respuesta, y tráfico
+
+### Actualizaciones
+
+El despliegue se actualiza automáticamente cuando se hace push a la rama `feat/-Render_deployment`:
+
+```bash
+git add .
+git commit -m "Update feature"
+git push origin feat/-Render_deployment
+# Render detecta el cambio y redespliega automáticamente (~5-10 min)
+```
+
+## �📈 Resultados
 
 ### Rendimiento del Modelo
 
@@ -328,10 +477,14 @@ Este proyecto es parte de un bootcamp educativo y está destinado para fines de 
 
 ## 🙏 Agradecimientos
 
+- Dataset: [Clasificación de Salud Fetal a partir de datos CTG](https://www.kaggle.com/datasets/andrewmvd/fetal-health-classification/data)
 - Instructores y mentores del Bootcamp IA P5
 - Comunidades de scikit-learn y FastAPI
+- [Render.com](https://render.com) por proporcionar hosting gratuito para el proyecto
 
 ---
 
 **Nota**: Este es un proyecto de Machine Learning para fines educativos. Las decisiones médicas siempre deben ser tomadas por profesionales de la salud cualificados.
+
+**🌐 Demo en Vivo**: [https://fetal-health-frontend.onrender.com](https://fetal-health-frontend.onrender.com)
 
