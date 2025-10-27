@@ -1,4 +1,15 @@
 from setuptools import setup, find_packages
+from pathlib import Path
+
+# Leer requirements.txt
+def read_requirements(filename):
+    requirements_path = Path(__file__).parent / filename
+    with open(requirements_path, encoding='utf-8') as f:
+        return [
+            line.strip() 
+            for line in f 
+            if line.strip() and not line.startswith('#')
+        ]
 
 setup(
     name="equipo4-ml-project",
@@ -8,14 +19,7 @@ setup(
     packages=find_packages(),
     py_modules=["configure"],  # Incluir configure.py de la raíz
     python_requires=">=3.8",
-    install_requires=[
-        "pandas>=1.5.0",
-        "numpy>=1.23.0",
-        "scikit-learn>=1.2.0",
-        "matplotlib>=3.6.0",
-        "seaborn>=0.12.0",
-        "jupyter>=1.0.0",
-    ],
+    install_requires=read_requirements('requirements.txt'),
     extras_require={
         "dev": [
             "pytest>=7.0.0",

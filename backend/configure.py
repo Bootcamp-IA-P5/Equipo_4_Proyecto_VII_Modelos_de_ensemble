@@ -2,7 +2,7 @@
 from pathlib import Path
 
 # ruta raiz del proyecto
-PROJECT_ROOT = Path(__file__).parent
+PROJECT_ROOT = Path(__file__).parent.parent
 
 # ruta al archivo de datos
 DATA_DIR = PROJECT_ROOT / "data"

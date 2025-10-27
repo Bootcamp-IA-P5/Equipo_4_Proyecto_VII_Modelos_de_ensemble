@@ -27,6 +27,8 @@ RUN pip install --no-cache-dir --default-timeout=1000 -r requirements.txt
 
 # Crear usuario no-root para seguridad
 RUN useradd --create-home appuser
+# Asegurar permisos completos para appuser
+RUN chown -R appuser:appuser /app && chmod -R 755 /app
 
 # Copiar el código del proyecto
 COPY --chown=appuser:appuser . .
