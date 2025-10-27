@@ -134,12 +134,27 @@ Equipo_4_Proyecto_VII_Modelos_de_ensemble/
    data/raw/fetal_health.csv
    ```
 
-3. **Construir e iniciar los servicios**
+3. **Entrenar el modelo (PRIMER USO)**
+   
+   ⚠️ **Importante**: La primera vez que clonas el proyecto, los modelos no están entrenados. Debes ejecutar el pipeline de entrenamiento antes de usar la aplicación:
+   
+   ```bash
+   docker compose --profile training up train-model
+   ```
+   
+   Este proceso puede tardar varios minutos y generará:
+   - Modelos entrenados en `models/`
+   - Reportes de métricas en `reports/`
+   - Dataset procesado en `data/processed/`
+   
+   Para más detalles, consulta la sección [Entrenamiento del Modelo](#entrenamiento-del-modelo).
+
+4. **Construir e iniciar los servicios**
    ```bash
    docker compose up --build
    ```
 
-4. **Acceder a las aplicaciones**
+5. **Acceder a las aplicaciones**
    - **Frontend (Streamlit)**: http://localhost:8501
    - **Backend API**: http://localhost:8000
    - **Documentación API**: http://localhost:8000/docs
