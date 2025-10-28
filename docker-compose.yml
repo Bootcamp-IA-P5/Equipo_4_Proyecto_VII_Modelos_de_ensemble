@@ -1,0 +1,89 @@
+services:
+  # Backend API con FastAPI
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+    environment:
+      - PYTHONPATH=/app
+    #--reload enables uvicorn server auto-restart whenever source files change (use only for development)
+    command: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+
+  # Frontend con Streamlit
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./frontend:/app/frontend
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+    #env_file:
+    #  - frontend/.env
+    environment:
+      - PYTHONPATH=/app
+    #This overrides the container’s default entry point to launch Streamlit,
+    #executing app.py and binding it to port 8501 on all interfaces (0.0.0.0)
+    #so the UI is reachable from outside the container.
+    command: streamlit run frontend/app.py --server.port 8501 --server.address 0.0.0.0
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # Servicio para entrenar el modelo (opcional)
+  train-model:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./backend:/app/backend
+    environment:
+      - PYTHONPATH=/app
+    command: >
+      sh -c "
+      echo '========================================'
+      echo 'Installing package in editable mode...'
+      echo '========================================'
+      pip install --no-cache-dir -e ./backend
+      echo ''
+      echo '========================================'
+      echo 'Running EDA script...'
+      echo '========================================'
+      python backend/eda.py
+      EDA_EXIT_CODE=$?
+      if [ $EDA_EXIT_CODE -ne 0 ]; then
+        echo 'ERROR: EDA script failed with exit code' $EDA_EXIT_CODE
+        exit 10
+      fi
+      echo ''
+      echo '========================================'
+      echo 'Running model training script...'
+      echo '========================================'
+      python src/train_model.py
+      TRAIN_EXIT_CODE=$?
+      if [ $TRAIN_EXIT_CODE -ne 0 ]; then
+        echo 'ERROR: Model training script failed with exit code' $TRAIN_EXIT_CODE
+        exit 20
+      fi
+      "
+    #Services assigned to a named profile don't start when you run docker compose up
+    #unless you explicitly opt into that profile, which keeps everyday backend/frontend
+    #usage lightweight. When you do need to retrain, launch it with the profile enabled:
+    #"docker compose --profile training up train-model"
+    profiles:
+      - training
