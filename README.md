@@ -7,7 +7,7 @@
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6.1-orange.svg)
 ![Render](https://img.shields.io/badge/Deployed%20on-Render-46E3B7.svg)
 
-Un proyecto de Machine Learning para clasificación de salud fetal utilizando modelos de ensemble, con optimización automática de hiperparámetros, despliegue containerizado e interfaces web interactivas.
+Proyecto de Machine Learning para clasificación de salud fetal utilizando modelos de ensemble, con optimización automática de hiperparámetros, despliegue containerizado e interfaces web interactivas.
 
 **[📋 Gestión del Proyecto](https://github.com/orgs/Bootcamp-IA-P5/projects/5)** | **[📊 Dataset en Kaggle](https://www.kaggle.com/datasets/andrewmvd/fetal-health-classification/data)**
 
@@ -141,13 +141,7 @@ Equipo_4_Proyecto_VII_Modelos_de_ensemble/
    cd Equipo_4_Proyecto_VII_Modelos_de_ensemble
    ```
 
-2. **Asegurar que el dataset esté en su lugar**
-   ```bash
-   # El dataset debe estar en:
-   data/raw/fetal_health.csv
-   ```
-
-3. **Entrenar el modelo (PRIMER USO)**
+2. **Entrenar el modelo (PRIMER USO)**
    
    ⚠️ **Importante**: La primera vez que clonas el proyecto, los modelos no están entrenados. (la carpeta backend/data/processed estará vacía). Debes ejecutar el pipeline de entrenamiento antes de usar la aplicación:
    
@@ -162,12 +156,12 @@ Equipo_4_Proyecto_VII_Modelos_de_ensemble/
    
    Para más detalles, consulta la sección [Entrenamiento del Modelo](#entrenamiento-del-modelo).
 
-4. **Construir e iniciar los servicios**
+3. **Construir e iniciar los servicios**
    ```bash
    docker compose up --build
    ```
 
-5. **Acceder a las aplicaciones**
+4. **Acceder a las aplicaciones**
    - **Frontend (Streamlit)**: http://localhost:8501
    - **Backend API**: http://localhost:8000
    - **Documentación API**: http://localhost:8000/docs
@@ -176,7 +170,7 @@ Equipo_4_Proyecto_VII_Modelos_de_ensemble/
 
 ### 🌐 Usando la Aplicación en Línea (Recomendado)
 
-La forma más fácil de probar el sistema es usando la **demo en vivo**:
+La forma más fácil de probar el sistema es usando la aplicación **desplegada on line**:
 
 1. **Accede al Frontend**: [https://fetal-health-frontend.onrender.com](https://fetal-health-frontend.onrender.com)
 2. **Ingresa los parámetros CTG** en los campos de entrada
@@ -239,34 +233,6 @@ curl https://fetal-health-backend-jnsr.onrender.com/dataset/info
 
 **Documentación Interactiva:**
 Visita [https://fetal-health-backend-jnsr.onrender.com/docs](https://fetal-health-backend-jnsr.onrender.com/docs) para probar la API directamente desde el navegador.
-
-#### API Local (Desarrollo)
-
-**Verificación de Estado:**
-```bash
-curl http://localhost:8000/health
-```
-
-#### Hacer una Predicción
-```bash
-curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{
-    "baseline_value": 120.0,
-    "accelerations": 0.0,
-    "fetal_movement": 0.0,
-    "uterine_contractions": 0.0,
-    "light_decelerations": 0.0,
-    "severe_decelerations": 0.0,
-    "prolongued_decelerations": 0.0,
-    ...
-  }'
-```
-
-#### Obtener Información del Dataset
-```bash
-curl http://localhost:8000/dataset/info
-```
 
 ## 🎓 Entrenamiento del Modelo
 
@@ -363,23 +329,6 @@ Obtener información sobre el dataset incluyendo total de muestras, característ
 
 ## � Despliegue
 
-### Estado Actual
-
-✅ **El proyecto está desplegado y funcionando en producción en Render.com**
-
-- **Frontend**: [https://fetal-health-frontend.onrender.com](https://fetal-health-frontend.onrender.com)
-- **Backend**: [https://fetal-health-backend-jnsr.onrender.com](https://fetal-health-backend-jnsr.onrender.com)
-- **Documentación API**: [https://fetal-health-backend-jnsr.onrender.com/docs](https://fetal-health-backend-jnsr.onrender.com/docs)
-
-### Características del Despliegue
-
-- ✅ **Containerizado con Docker**: Backend y Frontend en contenedores independientes
-- ✅ **CI/CD Automático**: Despliegue automático desde GitHub (rama `feat/-Render_deployment`)
-- ✅ **HTTPS Seguro**: Certificados SSL automáticos proporcionados por Render
-- ✅ **Health Checks**: Monitoreo automático del estado del servicio
-- ✅ **Escalabilidad**: Preparado para escalar según demanda
-
-### Infraestructura
 
 ```
 GitHub (feat/-Render_deployment)
@@ -402,30 +351,7 @@ GitHub (feat/-Render_deployment)
 └─────────────────────────────┘
 ```
 
-### Limitaciones del Plan Gratuito
-
-- **Suspensión por inactividad**: Los servicios se suspenden tras 15 minutos sin uso
-- **Tiempo de reactivación**: 30-60 segundos al primer acceso después de suspensión
-- **Recursos limitados**: 512 MB RAM, CPU compartida
-- **750 horas/mes**: Tiempo de ejecución gratuito por servicio
-
-### Desplegar tu Propia Instancia
-
-Si deseas desplegar tu propia versión del proyecto:
-
-1. **Fork el repositorio** a tu organización o cuenta de GitHub
-2. **Crea una cuenta en [Render.com](https://render.com)** (gratis)
-3. **Autoriza acceso** a tu organización de GitHub (ver [GITHUB_ORG_ACCESS.md](GITHUB_ORG_ACCESS.md))
-4. **Sigue la guía de despliegue**: Ver [DEPLOYMENT.md](DEPLOYMENT.md) y [RENDER_CHECKLIST.md](RENDER_CHECKLIST.md)
-
 La configuración está completamente automatizada mediante `render.yaml`. Render detectará automáticamente la configuración y desplegará ambos servicios.
-
-### Monitoreo y Logs
-
-Puedes monitorear el estado de los servicios en:
-- **Render Dashboard**: [https://dashboard.render.com](https://dashboard.render.com)
-- **Logs en tiempo real**: Disponibles en el dashboard de cada servicio
-- **Métricas**: CPU, memoria, tiempo de respuesta, y tráfico
 
 ### Actualizaciones
 
@@ -442,7 +368,7 @@ git push origin feat/-Render_deployment
 
 ### Rendimiento del Modelo
 
-El mejor modelo (típicamente AdaBoost o Random Forest) alcanza:
+El mejor modelo (típicamente AdaBoost) alcanza:
 - **Accuracy Test**: ~95%
 - **Score Validación Cruzada**: ~98%
 - **Precisión**: ~95%
